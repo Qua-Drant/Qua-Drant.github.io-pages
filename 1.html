@@ -1,113 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>2023年全国粮食播种面积、总产量及单位面积产量情况</title>
-    <!-- 引入echarts库文件 -->
-    <script src="/lib/echarts.js"></script>
-    <script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.5.0/files/dist/extension/dataTool.min.js"></script>
-    <!-- 引入jQuery库文件 -->
-    <script src="/lib/jquery-3.6.0.js"></script>
-    <style>
-      h1 {
-        color: #000000;
-      }
-      p {
-        text-indent: 2em;
-      }
-      #main {
-        display: flex;
-        justify-content: space-around;
-        /*margin: 15px;*/
-        padding: 20px;
-      }
-      #description {
-        /*border: 2px solid #bfa;*/
-        width: 500px;
-        height: 500px;
-        left: 20px;
-        line-height: 30px;
-        font-size: 13.6px;
-        /*overflow: scroll;*/
-      }
-      p {
-        text-indent: 2em;
-      }
-    </style>
-  </head>
-  <body style="background-color: #f2f6ed">
-    <h1 align="center">2023年全国粮食播种面积、总产量及单位面积产量情况</h1>
-    <div id="main">
-      <div id="description" style="color: rgb(12, 12, 14)">
-        <p>
-          根据对全国31个省（区、市）的调查，2023年全国粮食播种面积、单位面积产量和总产量分别如下：
-        </p>
-        <p>
-          一、全国粮食播种面积118969千公顷（178453万亩），比2022年增加636千公顷（955万亩），增长0.5%。其中谷物播种面积99926千公顷（149890万亩），比2022年增加658千公顷（986万亩），增长0.7%。
-        </p>
-        <p>
-          二、全国粮食单位面积产量5845公斤/公顷（390公斤/亩），比2022年增加43.6公斤/公顷（2.9公斤/亩），增长0.8%。其中谷物单位面积产量6419公斤/公顷（428公斤/亩），比2022年增加40.0公斤/公顷（2.7公斤/亩），增长0.6%。
-        </p>
-        <p>
-          三、全国粮食总产量69541万吨（13908亿斤），比2022年增加888万吨（178亿斤），增长1.3%。其中谷物产量64143万吨（12829亿斤），比2022年增加819万吨（164亿斤），增长1.3%。
-        </p>
-      </div>
-      <!-- 定义图表显示区域 -->
-      <div id="myDiv" style="width: 600px; height: 500px"></div>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>2023年全国粮食播种面积、总产量及单位面积产量情况</title>
+  <!-- 引入echarts库文件 -->
+  <script src="/lib/echarts.js"></script>
+  <script type="text/javascript"
+    src="https://registry.npmmirror.com/echarts/5.5.0/files/dist/extension/dataTool.min.js"></script>
+  <!-- 引入jQuery库文件 -->
+  <script src="/lib/jquery-3.6.0.js"></script>
+  <style>
+    h1 {
+      color: #000000;
+    }
+
+    p {
+      text-indent: 2em;
+    }
+
+    #main {
+      display: flex;
+      justify-content: space-around;
+      /*margin: 15px;*/
+      padding: 20px;
+    }
+
+    #description {
+      /*border: 2px solid #bfa;*/
+      width: 500px;
+      height: 500px;
+      left: 20px;
+      line-height: 30px;
+      font-size: 13.6px;
+      /*overflow: scroll;*/
+    }
+
+    p {
+      text-indent: 2em;
+    }
+  </style>
+</head>
+
+<body style="background-color: #f2f6ed">
+  <h1 align="center">2023年全国粮食播种面积、总产量及单位面积产量情况</h1>
+  <div id="main">
+    <div id="description" style="color: rgb(12, 12, 14)">
+      <p>
+        根据对全国31个省（区、市）的调查，2023年全国粮食播种面积、单位面积产量和总产量分别如下：
+      </p>
+      <p>
+        一、全国粮食播种面积118969千公顷（178453万亩），比2022年增加636千公顷（955万亩），增长0.5%。其中谷物播种面积99926千公顷（149890万亩），比2022年增加658千公顷（986万亩），增长0.7%。
+      </p>
+      <p>
+        二、全国粮食单位面积产量5845公斤/公顷（390公斤/亩），比2022年增加43.6公斤/公顷（2.9公斤/亩），增长0.8%。其中谷物单位面积产量6419公斤/公顷（428公斤/亩），比2022年增加40.0公斤/公顷（2.7公斤/亩），增长0.6%。
+      </p>
+      <p>
+        三、全国粮食总产量69541万吨（13908亿斤），比2022年增加888万吨（178亿斤），增长1.3%。其中谷物产量64143万吨（12829亿斤），比2022年增加819万吨（164亿斤），增长1.3%。
+      </p>
     </div>
+    <!-- 定义图表显示区域 -->
+    <div id="myDiv" style="width: 600px; height: 500px"></div>
+  </div>
 
-    <script type="text/javascript">
-          // 初始化echarts对象
-          // var myChart_exForest = echarts.init(document.getElementById("myDiv"))
-          var chartDom = document.getElementById("myDiv");
-          var myChart = echarts.init(chartDom);
-          var option;
+  <script type="text/javascript">
+    // 初始化echarts对象
+    // var myChart_exForest = echarts.init(document.getElementById("myDiv"))
+    var chartDom = document.getElementById("myDiv");
+    var myChart = echarts.init(chartDom);
+    var option;
 
-          option = {
-                // title: {
-                //     text: '粮食产量情况'
-                // },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'shadow'
-                    }
-                },
-                legend: {},
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis: {
-                    type: 'value',
-                    boundaryGap: [0, 0.01]
-                },
-                yAxis: {
-                    type: 'category',
-                    data: ['薯类', '豆类', '谷物', '秋粮', '早稻', '夏粮', '全年粮食']
-                },
-                series: [
-                    {
-                        name: '播种面积（千公顷）',
-                        type: 'bar',
-                        data: [7048.0, 11994.2, 99926.4, 87626.8, 4733.1, 26608.6, 118968.5]
-                    },
-                    {
-                        name: '总产量（万吨）',
-                        type: 'bar',
-                        data: [3013.9, 2384.1, 64143.0, 52092.0, 2833.7, 14615.2, 69541.0]
-                    },
-                    {
-                        name: '单位面积产量（公斤/公顷）',
-                        type: 'bar',
-                        data: [4276.2, 1987.7, 6419.0, 5944.8, 5987.0, 5492.7, 5845.3]
-                    }
-                ]
-            };
+    option = {
+      // title: {
+      //     text: '粮食产量情况'
+      // },
+      toolbox: {
+        feature: {
+          dataView: { show: true, readOnly: false }, // 启用数据视图
+          saveAsImage: { show: true }, // 启用保存为图片功能
+        }
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      legend: {},
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01]
+      },
+      yAxis: {
+        type: 'category',
+        data: ['薯类', '豆类', '谷物', '秋粮', '早稻', '夏粮', '全年粮食']
+      },
+      series: [
+        {
+          name: '播种面积（千公顷）',
+          type: 'bar',
+          data: [7048.0, 11994.2, 99926.4, 87626.8, 4733.1, 26608.6, 118968.5]
+        },
+        {
+          name: '总产量（万吨）',
+          type: 'bar',
+          data: [3013.9, 2384.1, 64143.0, 52092.0, 2833.7, 14615.2, 69541.0]
+        },
+        {
+          name: '单位面积产量（公斤/公顷）',
+          type: 'bar',
+          data: [4276.2, 1987.7, 6419.0, 5944.8, 5987.0, 5492.7, 5845.3]
+        }
+      ]
+    };
 
-          option && myChart.setOption(option);
-    </script>
-  </body>
+    option && myChart.setOption(option);
+  </script>
+</body>
+
 </html>
