@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>ECharts Tooltip HTML Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+</head>
+<body style="height: 100%; margin: 0">
+    <!-- 准备一个 DOM 容器 -->
+    <div id="main" style="height: 100%"></div>
+    <script type="text/javascript">
+        // 基于准备好的 DOM，初始化 echarts 实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: function (params) {
+                    // params 参数中包含了数据信息
+                    var value = params.value;
+                    return `
+                        <div style="border: 1px solid #ccc; padding: 10px;">
+                            <h4 style="margin: 0; color: #4CAF50;">${params.name}</h4>
+                            <p style="margin: 0;">Value: <strong>${value}</strong></p>
+                            <p style="margin: 0;">Additional info here</p>
+                            <a href="https://example.com" target="_blank">Learn more</a>
+                        </div>
+                    `;
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [120, 200, 150, 80, 70, 110, 130],
+                type: 'bar'
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

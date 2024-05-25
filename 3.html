@@ -22,18 +22,15 @@
         #main {
             display: flex;
             justify-content: space-around;
-            /*margin: 15px;*/
             padding: 20px;
         }
 
         #description {
-            /*border: 2px solid #bfa;*/
             width: 500px;
             height: 500px;
             left: 20px;
             line-height: 30px;
             font-size: 13.6px;
-            /*overflow: scroll;*/
         }
     </style>
 </head>
@@ -47,34 +44,82 @@
 
     <script type="text/javascript">
         // 初始化echarts对象
-        // var myChart_exForest = echarts.init(document.getElementById("myDiv"))
         var chartDom = document.getElementById("myDiv");
         var myChart = echarts.init(chartDom);
         var option;
 
         option = {
             title: {
-                // text: 'Distribution of Electricity',
                 subtext: '粮食播种面积（单位：千公顷）'
             },
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
                     type: 'cross'
+                },
+                formatter: function (params) {
+                    var tooltipContent = params.map(function (item) {
+                        if (item.name == '2014') {
+                            return `
+                            <div style="border: 1px solid #ccc; padding: 10px;">
+                                <h4 style="margin: 0; color: ${item.color};">时间节点1介绍</h4>
+                                <p style="margin: 0;">年份: <strong>${item.name}</strong></p>
+                                <p style="margin: 0;">数值: <strong>${item.value}</strong></p>
+                                <p style="margin: 0; letter-spacing: 1px">2014年9月25日，国家发展改革委等部门根据国务院批复的新一轮退</p>
+                                <p style="margin: 0; letter-spacing: 1px">耕还林还草总体规模和2014年任务安排，结合各地25度以上坡耕地</p>
+                                <p style="margin: 0; letter-spacing: 1px">和任务申请情况，印发了《关于下达2014年退耕还林还草年度任务</p>
+                                <p style="margin: 0; letter-spacing: 1px">的通知》，安排山西、湖北、湖南、广西、重庆、四川、贵州、云南、</p>
+                                <p style="margin: 0; letter-spacing: 1px">陕西、甘肃省（区、市）及新疆生产建设兵团2014年退耕还林任务</p>
+                                <p style="margin: 0; letter-spacing: 1px">500万亩。这是继1999年后的新一轮的退耕还林还草。截至2020年，</p>
+                                <p style="margin: 0; letter-spacing: 1px">22个工程省区和新疆生产建设兵团共实施新一轮退耕还林还草任务</p>
+                                <p style="margin: 0; letter-spacing: 1px">7550万亩，其中退耕地还林还草7450万亩、宜林荒山荒地造林100</p>
+                                <p style="margin: 0; letter-spacing: 1px">万亩。昔日的一座座荒山、一块块坡耕地披上了绿色盛装，一个个水</p>
+                                <p style="margin: 0; letter-spacing: 1px">土流失的贫瘠山村变得山清水秀，郁郁葱葱的森林成了绿色银行。</p>
+                                <p style="margin: 0; letter-spacing: 1px">退耕还林解放了农村劳动力，农民群众林果、养殖、劳务输出多业</p>
+                                <p style="margin: 0; letter-spacing: 1px">并举，不断拓宽致富门路，有效增加了农民收入。</p>
+                                <p style="margin: 0; letter-spacing: 1px"></p>
+
+                            </div>
+                        `;
+                        }
+                        else if (item.name == '2018') {
+                            return `
+                            <div style="border: 1px solid #ccc; padding: 10px;">
+                                <h4 style="margin: 0; color: ${item.color};">时间节点2介绍</h4>
+                                <p style="margin: 0;">年份: <strong>${item.name}</strong></p>
+                                <p style="margin: 0;">数值: <strong>${item.value}</strong></p>
+                                <p style="margin: 0; letter-spacing: 1px">2018年是农村改革四十周年，也是党的十九大提出实施乡村振兴战略</p>
+                                <p style="margin: 0; letter-spacing: 1px">的开局之年。中央一号文件中提到了夯实农业生产能力基础，其中包</p>
+                                <p style="margin: 0; letter-spacing: 1px">括了深入实施藏粮于地、藏粮于技战略，严守耕地红线，确保国家粮</p>
+                                <p style="margin: 0; letter-spacing: 1px">食安全。这一年，我国全面落实《永久基本农田特殊保护制度》，制</p>
+                                <p style="margin: 0; letter-spacing: 1px">止耕地“非农化”“非粮化”倾向，我国粮食播种面积缓慢回升。</p>
+                            </div>
+                        `;
+                        }
+                        else {
+                            return `
+                                <div style="border: 1px solid #ccc; padding: 10px;">
+                                <h4 style="margin: 0; color: ${item.color};">数据信息</h4>
+                                <p style="margin: 0;">年份: <strong>${item.name}</strong></p>
+                                <p style="margin: 0;">数值: <strong>${item.value}</strong></p>
+                        </div>
+                    `;
+                        }
+                    }).join('');
+
+                    return tooltipContent;
                 }
             },
             toolbox: {
                 show: true,
                 feature: {
-                    
                     dataView: { show: true, readOnly: false },
-                    saveAsImage: {}, // 启用数据视图
+                    saveAsImage: {}
                 }
             },
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                // prettier-ignore
                 data: ['1978', '1980', '1985', '1990', '1995', '2000', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022']
             },
             yAxis: {
@@ -93,16 +138,6 @@
                 dimension: 0,
                 pieces: [
                     {
-                        lte: 6,
-                        color: 'green'
-                    },
-                    {
-                        gt: 6,
-                        lte: 8,
-                        color: 'red'
-                    },
-                    {
-                        gt: 8,
                         lte: 14,
                         color: 'green'
                     },
@@ -113,6 +148,16 @@
                     },
                     {
                         gt: 17,
+                        lte: 18,
+                        color: 'green'
+                    },
+                    {
+                        gt: 18,
+                        lte: 21,
+                        color: 'red'
+                    },
+                    {
+                        gt: 21,
                         color: 'green'
                     }
                 ]
@@ -122,8 +167,7 @@
                     name: '播种面积',
                     type: 'line',
                     smooth: true,
-                    // prettier-ignore
-                    data: [120587,117234,108845,113466,110060,108463,104278,104958,105999,107545,110255,111695,112980,114368,115908,117455,118963,119230,117989,117038,116064,116768,117631,118332],
+                    data: [120587, 117234, 108845, 113466, 110060, 108463, 104278, 104958, 105999, 107545, 110255, 111695, 112980, 114368, 115908, 117455, 118963, 119230, 117989, 117038, 116064, 116768, 117631, 118332],
                     markArea: {
                         itemStyle: {
                             color: 'rgba(255, 173, 177, 0.4)'
